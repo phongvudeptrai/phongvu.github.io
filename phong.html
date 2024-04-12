@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    p {
+        color: red;
+    }
+</style>
+
+<body>
+    <h1>Đăng ký tài khoản</h1>
+    <form action="#" method="post" onsubmit="return check()">
+        Tài khoản : <input type="text" name="username" id="username">
+        <p id="kiemloitk"></p>
+        Mat khau : <input type="password" name="password" id="password">
+        <p id="kiemloimk"></p>
+        Email: <input type="text" name="email" id="email">
+        <p id="kiemloiemail"></p>
+        Nhap lai mat khau : <input type="password" name="password" id="passwords">
+        <p id="kiemloilaimk"></p>
+        <table border="1">
+            <thead>
+                <tr>
+                    <td>STT</td>
+                    <td>Tên</td>
+                    <td>Giá</td>
+                    <td>Số lượng</td>
+                    <td>Thành tiền</td>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Tai nghe</td>
+                    <td>$100</td>
+                    <td><input type="number" name="" id="soluong" min="0" class="sl"></td>
+                    <td class="thanhtien"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td>Loa</td>
+                    <td>$200</td>
+                    <td><input type="number" name="" id="soluong" min="0" class="sl"></td>
+                    <td class="thanhtien"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td>Dây sạc</td>
+                    <td>$300</td>
+                    <td><input type="number" name="" id="soluong" min="0" class="sl"></td>
+                    <td class="thanhtien"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td>Sạc dự phòng</td>
+                    <td>$400</td>
+                    <td><input type="number" name="" id="soluong" min="0" class="sl"></td>
+                    <td class="thanhtien"></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td>Ốp lưng</td>
+                    <td>$500</td>
+                    <td><input type="number" name="" id="soluong" min="0" class="sl"></td>
+                    <td class="thanhtien"></td>
+                </tr>
+
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="4">Tổng tiền </td>
+                    <td id="tongtien"></td>
+                </tr>
+            </tfoot>
+        </table><br> <br>
+        <input type="submit" id="dangky" value="Đăng ký">
+        <input type="reset" id="huy" value=" Hủy">
+    </form>
+    <script>
+        var sl = document.getElementsByClassName('sl');
+        for (let item of sl) {
+            item.onchange = function() {
+                tinhtien(this);
+            }
+        }
+
+        function tinhtien(item) {
+            let dg = item.parentElement.previousElementSibling.innerText;
+            let tt = item.parentElement.nextElementSibling;
+            // substr(1) lấy chuỗi bắt đầu từ vị trí 1
+            tt.innerText = '$' + (dg.substr(1) * item.value);
+
+            let tongtien = document.getElementsByClassName('thanhtien');
+
+            let tong = 0;
+            for (let item of tongtien) {
+                tong += item.innerHTML.substr(1) * 1;
+            }
+            document.getElementById('tongtien').innerHTML = `$${tong}`;
+        }
+
+        function check() {
+            let taikhoan = document.getElementById("username").value;
+            let matkhau = document.getElementById("password").value;
+            let email = document.getElementById("email").value;
+            let nhaplaimk = document.getElementById("passwords").value;
+            if (taikhoan == "" || taikhoan.length < 6) {
+                document.getElementById("kiemloitk").innerHTML = "Vui lòng nhập đầy đủ thông tin";
+                return false;
+            }
+            if (matkhau == "" || matkhau.length < 6) {
+                document.getElementById("kiemloimk").innerHTML = "Vui lòng nhập đầy đủ thông tin";
+                return false;
+            }
+            if (email == "" || !email.includes("@") || !email.includes(".")) {
+                document.getElementById("kiemloiemail").innerHTML = "Vui lòng nhập đầy đủ thông tin";
+                return false;
+            }
+            if (nhaplaimk == "" || nhaplaimk != matkhau) {
+                document.getElementById("kiemloilaimk").innerHTML = "Vui lòng nhập đầy đủ thông tin";
+                return false;
+            }
+
+            alert("Đăng ký thành công");
+            return true;
+        }
+    </script>
+
+</body>
+
+</html>
